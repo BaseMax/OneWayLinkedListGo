@@ -23,11 +23,48 @@ func (list *List) Create(value interface{}) {
 	list.Head = &Node{Value: value}
 }
 
-// Insert, O(1)
-func (list *List) Insert(value interface{}) {
+// InsertBegin, O(1)
+func (list *List) InsertBegin(value interface{}) {
 	node := &Node{Value: value}
 	node.Next = list.Head
 	list.Head = node
+}
+
+// InsertEnd, O(n)
+func (list *List) InsertEnd(value interface{}) {
+	node := list.Head
+	for node.Next != nil {
+		node = node.Next
+	}
+	node.Next = &Node{Value: value}
+}
+
+// InsertAfter, O(n)
+func (list *List) InsertAfter(value interface{}, after interface{}) {
+	node := list.Head
+	for node != nil {
+		if node.Value == after {
+			newNode := &Node{Value: value}
+			newNode.Next = node.Next
+			node.Next = newNode
+			return
+		}
+		node = node.Next
+	}
+}
+
+// InsertBefore, O(n)
+func (list *List) InsertBefore(value interface{}, before interface{}) {
+	node := list.Head
+	for node != nil {
+		if node.Next.Value == before {
+			newNode := &Node{Value: value}
+			newNode.Next = node.Next
+			node.Next = newNode
+			return
+		}
+		node = node.Next
+	}
 }
 
 // Delete, O(1)
