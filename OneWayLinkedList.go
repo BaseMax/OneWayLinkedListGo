@@ -69,7 +69,9 @@ func (list *List) InsertBefore(value interface{}, before interface{}) {
 
 // Delete, O(1)
 func (list *List) Delete() {
-	list.Head = list.Head.Next
+	if list.Head != nil {
+		list.Head = list.Head.Next
+	}
 }
 
 // Search, O(n)
