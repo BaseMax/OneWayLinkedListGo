@@ -68,10 +68,100 @@ func (list *List) InsertBefore(value interface{}, before interface{}) {
 }
 
 // Delete, O(1)
-func (list *List) Delete() {
+// func (list *List) Delete() {
+// 	if list.Head != nil {
+// 		list.Head = list.Head.Next
+// 	}
+// }
+
+// DeleteBegin, O(1)
+func (list *List) DeleteBegin() {
 	if list.Head != nil {
 		list.Head = list.Head.Next
 	}
+}
+
+// DeleteEnd, O(n)
+func (list *List) DeleteEnd() {
+	node := list.Head
+	for node.Next.Next != nil {
+		node = node.Next
+	}
+	node.Next = nil
+}
+
+// DeleteValue, O(n)
+func (list *List) DeleteValue(value interface{}) {
+	node := list.Head
+	for node != nil {
+		if node.Next.Value == value {
+			if node.Next.Next != nil {
+				node.Next = node.Next.Next
+			} else {
+				node.Next = nil
+			}
+			return
+		}
+		node = node.Next
+	}
+}
+
+// DeleteAfterValue, O(n)
+func (list *List) DeleteAfterValue(value interface{}) {
+	node := list.Head
+	for node != nil {
+		if node.Value == value {
+			node.Next = node.Next.Next
+			return
+		}
+		node = node.Next
+	}
+}
+
+// DeleteBeforeValue, O(n)
+func (list *List) DeleteBeforeValue(value interface{}) {
+	node := list.Head
+	for node != nil {
+		if node.Next.Next.Value == value {
+			node.Next = node.Next.Next
+			return
+		}
+		node = node.Next
+	}
+}
+
+// DeleteIndex, O(n)
+func (list *List) DeleteIndex(index int) {
+	if index < 0 {
+		return
+	}
+	node := list.Head
+	for i := 0; i < index; i++ {
+		node = node.Next
+	}
+	node.Next = node.Next.Next
+}
+
+// DeleteAfterIndex, O(n)
+func (list *List) DeleteAfterIndex(index int) {
+	// list.DeleteIndex(index + 1)
+
+	node := list.Head
+	for i := 0; i < index; i++ {
+		node = node.Next
+	}
+	node.Next = node.Next.Next
+}
+
+// DeleteBeforeIndex, O(n)
+func (list *List) DeleteBeforeIndex(index int) {
+	// list.DeleteIndex(index - 1)
+
+	node := list.Head
+	for i := 0; i < index-1; i++ {
+		node = node.Next
+	}
+	node.Next = node.Next.Next
 }
 
 // Search, O(n)
