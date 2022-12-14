@@ -2,6 +2,7 @@
 
 This is a simple implementation of a one-way linked-list in Go. The one way linkedlist is a data structure that is made up of nodes. Each node contains a value and a pointer to the next node. The head of the list is the first node in the list. The tail of the list is the last node in the list. The tail of the list points to nil.
 
+<!-- 
 # Features
 
 - [x] Create
@@ -18,7 +19,7 @@ This is a simple implementation of a one-way linked-list in Go. The one way link
 - [ ] Get index of value
 - [ ] Get value at index
 - [ ] Get values
-- [ ] Get values in reverse
+- [ ] Get values in reverse -->
 
 ## Structure
 
